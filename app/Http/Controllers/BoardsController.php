@@ -40,6 +40,7 @@ class BoardsController extends Controller
 
     public function destroy(Board $board)
     {
+        $this->authorize('delete', $board);
         $board->delete();
         return Redirect::route('boards.index');
     }
@@ -52,6 +53,7 @@ class BoardsController extends Controller
     }
     public function update(Request $request, Board $board)
     {
+        $this->authorize('update', $board);
         $board->name = $request->name;
         $board->save();
         return Redirect::route('boards.show', [

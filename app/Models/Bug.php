@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Board extends Model
+class Bug extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
+        'description',
         'user_id'
     ];
 
@@ -19,13 +20,13 @@ class Board extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function columns()
+    public function boards()
     {
-        return $this->hasMany(Column::class);
+        return $this->belongsToMany(Board::class);
     }
 
-    public function bugs()
+    public function columns()
     {
-        return $this->belongsToMany(Bug::class);
+        return $this->belongsToMany(Column::class);
     }
 }
