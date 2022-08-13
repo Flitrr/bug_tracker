@@ -7,10 +7,10 @@
             </h2>
         </template>
         <div class="w-9/12 mx-auto">
-            <form @submit.prevent="form.post('/bugs')">
+            <form @submit.prevent="form.post(!$page.props.column_id ? '/bugs' : `/columns/${$page.props.column_id}/bugs`)">
                 <div>
                     <Label for="name">Name: </Label>
-                    <Input id="name" v-model="form.name"/>
+                    <Input id="name" v-model="form.user"/>
                 </div>
                 <div>
                     <Label for="description">Description: </Label>
@@ -29,7 +29,7 @@ import Label from "@/Components/Label";
 import Input from "@/Components/Input";
 import {usePage} from "@inertiajs/inertia-vue3";
 import PrimaryButton from "@/Components/PrimaryButton";
-const form = useForm({name: null, description: null, user_id: usePage().props.value.auth.user.id});
+const form = useForm({user: null, description: null, user_id: usePage().props.value.auth.user.id, column_id: usePage().props.value.column_id});
 </script>
 
 <style scoped>

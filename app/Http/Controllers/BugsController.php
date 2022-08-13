@@ -23,7 +23,7 @@ class BugsController extends Controller
     public function store(Request $request)
     {
         $bug = new Bug();
-        $bug->name = $request->name;
+        $bug->name = $request->user;
         $bug->description = $request->description;
         $bug->save();
         $bug->users()->attach($request->user_id);
@@ -32,7 +32,7 @@ class BugsController extends Controller
 
     public function show(Bug $bug)
     {
-        return Inertia::render('Bugs/View', ['bug' => $bug]);
+        return Inertia::render('Bugs/View', ['bug' => $bug, 'canGoBack' => true]);
     }
 
     public function edit(Bug $bug)
@@ -43,10 +43,10 @@ class BugsController extends Controller
     public function update(Request $request, Bug $bug)
     {
         $this->authorize('update', $bug);
-        $bug->name = $request->name;
+        $bug->name = $request->user;
         $bug->description = $request->description;
         $bug->save();
-        return Redirect::route('bugs.show', ['bug' => $bug->id]);
+        return Inertia::render('Bugs/View', ['bug' => $bug]);
     }
 
     public function destroy(Bug $bug)

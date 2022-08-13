@@ -6,6 +6,9 @@
                 View Bug
             </h2>
         </template>
+        <div v-if="$page.props.canGoBack">
+            <a href="#" @click="back">Go Back</a>
+        </div>
         <div class="h-96 flex items-stretch justify-center">
             <h3 class="text-center">{{$page.props.bug.name}}</h3>
             <p>{{$page.props.bug.description}}</p>
@@ -22,6 +25,9 @@ import {Head} from "@inertiajs/inertia-vue3";
 import Authenticated from "@/Layouts/Authenticated";
 import EditButton from "@/Components/EditButton";
 import DeleteButton from "@/Components/DeleteButton";
+function back() {
+    window.history.back();
+}
 </script>
 
 <style scoped>

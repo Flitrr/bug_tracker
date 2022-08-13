@@ -15,7 +15,14 @@
                 <div class="flex-shrink-0 w-4/12 self-stretch relative" v-for="column in $page.props.board.columns">
                     <h2 class="text-xl font-bold mb-2">{{ column.name }}<Gear :href="`/columns/${column.id}`" width="w-6" class="w-6 cursor-pointer block absolute -top-20 right-0"/></h2>
                     <div class="w-full h-full rounded-sm bg-white overflow-y-scroll">
+                        <ul v-if="column.bugs">
+                            <li class="list-none" v-for="bug in column.bugs">
+                                <Link :href="`/bugs/${bug.id}`" class="my-8 text-blue-500 font-bold text-xl block text-center">{{bug.name}}</Link>
+                            </li>
+                        </ul>
+                        <p v-else>No Bugs</p>
                     </div>
+                    <PrimaryButton @click="$inertia.get(`/columns/${column.id}/bugs`)">Add a bug</PrimaryButton>
                 </div>
                 <span @click="openModal" class="my-auto cursor-pointer">
                 <span class="block text-6xl">+</span><span class="block text-4xl">Add Column</span>
@@ -30,7 +37,7 @@
 </template>
 
 <script setup>
-import {Head} from "@inertiajs/inertia-vue3";
+import {Head, Link} from "@inertiajs/inertia-vue3";
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import EditButton from "@/Components/EditButton";
 import DeleteButton from "@/Components/DeleteButton";
@@ -38,6 +45,7 @@ import {Inertia} from "@inertiajs/inertia";
 import {computed, ref} from "vue";
 import NewColumnModal from "@/Components/Boards/NewColumnModal";
 import Gear from "@/Components/Icons/Gear";
+import PrimaryButton from "@/Components/PrimaryButton";
 
 const modal = ref(null);
 

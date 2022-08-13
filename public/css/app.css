@@ -731,6 +731,10 @@ select {
   margin-top: auto;
   margin-bottom: auto;
 }
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -835,6 +839,9 @@ select {
 }
 .h-96 {
   height: 24rem;
+}
+.h-28 {
+  height: 7rem;
 }
 .min-h-screen {
   min-height: 100vh;

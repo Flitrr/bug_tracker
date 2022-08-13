@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -19,17 +20,17 @@ class BoardsController extends Controller
     public function store(Request $request)
     {
         $board = new Board();
-        $board->users->push($request->user());
         $board->name = $request->name;
         $board->save();
+        $board->users()->attach(Auth::user()->id);
         return Redirect::route('boards.index');
     }
 
     public function show(Board $board)
     {
-        $board->columns;
+        $fullBoard = Board::with('columns.bugs')->find($board->id);
         return Inertia::render('Boards/One', [
-            'board' => $board,
+            'board' => $fullBoard,
         ]);
     }
 
