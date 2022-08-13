@@ -53,7 +53,7 @@ class BugPolicy
      */
     public function update(User $user, Bug $bug)
     {
-        return $bug->user_id === $user->id;
+        return $bug->users->contains('id', '=', $user->id);
     }
 
     /**
@@ -65,7 +65,7 @@ class BugPolicy
      */
     public function delete(User $user, Bug $bug)
     {
-        return $bug->user_id === $user->id;
+        return $bug->users->contains('id', '=', $user->id);
     }
 
     /**

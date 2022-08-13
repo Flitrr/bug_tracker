@@ -26,10 +26,13 @@
 <script setup>
 
 import Authenticated from "@/Layouts/Authenticated";
-import {Head, Link} from "@inertiajs/inertia-vue3";
+import {Head, Link, usePage} from "@inertiajs/inertia-vue3";
 import EditButton from "@/Components/EditButton";
 import DeleteButton from "@/Components/DeleteButton";
 import PrimaryButton from "@/Components/PrimaryButton";
+const page = usePage();
+
+console.log(page.props.value)
 </script>
 
 <style scoped>

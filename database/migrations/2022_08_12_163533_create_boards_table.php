@@ -17,7 +17,6 @@ class CreateBoardsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->foreignId('user_id');
         });
     }
 

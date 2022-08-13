@@ -15,18 +15,13 @@ class Bug extends Model
         'user_id'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function boards()
-    {
-        return $this->belongsToMany(Board::class);
-    }
-
     public function columns()
     {
-        return $this->belongsToMany(Column::class);
+        return $this->morphedByMany(Column::class, 'buggable');
+    }
+
+    public function users()
+    {
+        return $this->morphedByMany(User::class, 'buggable');
     }
 }

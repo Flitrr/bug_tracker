@@ -19,6 +19,6 @@ class Column extends Model
     }
 
     public function bugs() {
-        return $this->belongsToMany(Bug::class);
+        return $this->morphToMany(Bug::class, 'buggable');
     }
 }

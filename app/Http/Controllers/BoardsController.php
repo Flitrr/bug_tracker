@@ -19,7 +19,7 @@ class BoardsController extends Controller
     public function store(Request $request)
     {
         $board = new Board();
-        $board->user_id = $request->user()->id;
+        $board->users->push($request->user());
         $board->name = $request->name;
         $board->save();
         return Redirect::route('boards.index');

@@ -53,7 +53,7 @@ class BoardPolicy
      */
     public function update(User $user, Board $board)
     {
-        return $board->user_id === $user->id;
+        return $board->users->contains('id', '=', $user->id);
     }
 
     /**
@@ -65,7 +65,7 @@ class BoardPolicy
      */
     public function delete(User $user, Board $board)
     {
-        return $board->user_id === $user->id;
+        return $board->users->contains('id', '=', $user->id);
     }
 
     /**
