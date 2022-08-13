@@ -17,4 +17,8 @@ class Column extends Model
     public function board() {
         return $this->belongsTo(Board::class);
     }
+
+    public function bugs() {
+        return $this->morphToMany(Bug::class, 'buggable');
+    }
 }

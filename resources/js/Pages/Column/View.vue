@@ -6,10 +6,10 @@
                 Column
             </h2>
         </template>
-        <div class="h-96 flex items-stretch justify-center">
-            <div class="w-6/12">
-                <PrimaryButton @click="$inertia.get(`/boards/${$page.props.column.board_id}`)">Back to Board</PrimaryButton>
-                <h2>{{$page.props.column.name}}</h2>
+        <div class="h-96">
+            <div class="w-6/12 mx-auto flex flex-col gap-1">
+                <PrimaryButton @click="$inertia.get(`/boards/${$page.props.column.board_id}`)" class="block">Back to Board</PrimaryButton>
+                <h2 class="text-center">{{$page.props.column.name}}</h2>
 <!--                other content here -->
                 <div class="flex items-center justify-around">
                     <EditButton :href="`/columns/${$page.props.column.id}/edit`" class="block">Edit</EditButton>

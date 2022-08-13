@@ -11,16 +11,16 @@ class Board extends Model
 
     protected $fillable = [
         'name',
-        'user_id'
     ];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function columns()
     {
         return $this->hasMany(Column::class);
     }
+
 }

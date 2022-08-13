@@ -42,4 +42,17 @@ Route::get('/columns/{column}', [\App\Http\Controllers\ColumnsController::class,
 Route::delete('/columns/{column}', [\App\Http\Controllers\ColumnsController::class, 'destroy'])->middleware(['auth', 'verified'])->name('columns.destroy');
 Route::get('/columns/{column}/edit', [\App\Http\Controllers\ColumnsController::class, 'edit'])->middleware(['auth', 'verified'])->name('columns.edit');
 Route::put('/columns/{column}', [\App\Http\Controllers\ColumnsController::class, 'update'])->middleware(['auth', 'verified'])->name('columns.update');
+
+Route::get('/columns/{column}/bugs', [\App\Http\Controllers\BugColumnsController::class, 'index'])->middleware(['auth', 'verified'])->name('columns.bugs.index');
+Route::post('/columns/{column}/bugs', [\App\Http\Controllers\BugColumnsController::class, 'store'])->middleware(['auth', 'verified'])->name('columns.bugs.store');
+Route::post('/columns/{column}/bugs/{bug}', [\App\Http\Controllers\BugColumnsController::class, 'select'])->middleware(['auth', 'verified'])->name('columns.bugs.select');
+Route::get('/columns/{column}/bugs/create', [\App\Http\Controllers\BugColumnsController::class, 'create'])->middleware(['auth', 'verified'])->name('columns.bugs.create');
+
+Route::get('/bugs', [\App\Http\Controllers\BugsController::class, 'index'])->middleware(['auth', 'verified'])->name('bugs.index');
+Route::post('/bugs', [\App\Http\Controllers\BugsController::class, 'store'])->middleware(['auth', 'verified'])->name('bugs.store');
+Route::get('/bugs/create', [\App\Http\Controllers\BugsController::class, 'create'])->middleware(['auth', 'verified'])->name('bugs.create');
+Route::get('/bugs/{bug}', [\App\Http\Controllers\BugsController::class, 'show'])->middleware(['auth', 'verified'])->name('bugs.update');
+Route::put('/bugs/{bug}', [\App\Http\Controllers\BugsController::class, 'update'])->middleware(['auth', 'verified'])->name('bugs.update');
+Route::delete('/bugs/{bug}', [\App\Http\Controllers\BugsController::class, 'destroy'])->middleware(['auth', 'verified'])->name('bugs.destroy');
+Route::get('/bugs/{bug}/edit', [\App\Http\Controllers\BugsController::class, 'edit'])->middleware(['auth', 'verified'])->name('bugs.edit');
 require __DIR__ . '/auth.php';

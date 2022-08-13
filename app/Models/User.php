@@ -44,6 +44,10 @@ class User extends Authenticatable
 
     public function boards()
     {
-        return $this->hasMany(Board::class);
+        return $this->belongsToMany(Board::class);
+    }
+
+    public function bugs() {
+        return $this->morphToMany(Bug::class, 'buggable');
     }
 }
