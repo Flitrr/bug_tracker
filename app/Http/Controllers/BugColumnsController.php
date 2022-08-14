@@ -29,16 +29,23 @@ class BugColumnsController extends Controller
     public function store(Column $column, Request $request)
     {
         $bug = new Bug();
-        $bug->name = $request->name;
+        $bug->name = $request->user;
         $bug->description = $request->description;
         $bug->save();
         $bug->users()->attach($request->user_id);
-        return Redirect::route('columns.bugs.index', ['column' => $column]);
+        $bug->columns()->attach($column->id);
+        return Redirect::route('boards.show', ['board' => $column->board->id]);
     }
 
     public function select(Column $column, Bug $bug)
     {
         $bug->columns()->attach($column->id);
-        return Redirect::route('boards.show', ['board' => $column->board]);
+        return Redirect::route('boards.show', ['board' => $column->board->id]);
+    }
+
+    public function remove(Column $column, Bug $bug)
+    {
+        $bug->columns()->detach([$column->id]);
+        return Redirect::route('boards.show', ['board' => $column->board->id]);
     }
 }

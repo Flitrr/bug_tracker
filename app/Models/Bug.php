@@ -24,4 +24,9 @@ class Bug extends Model
     {
         return $this->morphedByMany(User::class, 'buggable');
     }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

@@ -1,5 +1,5 @@
 <template>
-    <Modal>
+    <Modal @close-modal="closeModal" :open="modalStore.showNewColumnModalBoardsOne">
         <div class="h-full">
             <form @submit.prevent="submit" class="mx-auto rounded-sm flex flex-col items-center gap-3">
                 <div>
@@ -19,6 +19,8 @@ import {useForm} from "@inertiajs/inertia-vue3";
 import PrimaryButton from "@/Components/PrimaryButton";
 import {reactive, ref} from "vue";
 import {Inertia} from "@inertiajs/inertia";
+import {useModalStore} from "@/Stores/modalStore";
+const modalStore = useModalStore();
 const props = defineProps(['board']);
 const form = useForm({
     name: null,
@@ -26,6 +28,9 @@ const form = useForm({
 })
 function submit() {
     form.post(window.location.href + '/columns', {preserveState: false});
+}
+function closeModal() {
+    modalStore.showNewColumnModalBoardsOne = ! modalStore.showNewColumnModalBoardsOne;
 }
 </script>
 

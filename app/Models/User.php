@@ -50,4 +50,9 @@ class User extends Authenticatable
     public function bugs() {
         return $this->morphToMany(Bug::class, 'buggable');
     }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

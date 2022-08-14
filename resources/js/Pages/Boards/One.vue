@@ -17,14 +17,15 @@
                     <div class="w-full h-full rounded-sm bg-white overflow-y-scroll">
                         <ul v-if="column.bugs">
                             <li class="list-none" v-for="bug in column.bugs">
+                                <AddBugModal :column="column" />
                                 <Link :href="`/bugs/${bug.id}`" class="my-8 text-blue-500 font-bold text-xl block text-center">{{bug.name}}</Link>
                             </li>
                         </ul>
                         <p v-else>No Bugs</p>
                     </div>
-                    <PrimaryButton @click="$inertia.get(`/columns/${column.id}/bugs`)">Add a bug</PrimaryButton>
+                    <PrimaryButton @click="openBugModal">Add a bug</PrimaryButton>
                 </div>
-                <span @click="openModal" class="my-auto cursor-pointer">
+                <span @click="openColumnModal" class="my-auto cursor-pointer">
                 <span class="block text-6xl">+</span><span class="block text-4xl">Add Column</span>
                 </span>
             </div>
@@ -46,18 +47,29 @@ import {computed, ref} from "vue";
 import NewColumnModal from "@/Components/Boards/NewColumnModal";
 import Gear from "@/Components/Icons/Gear";
 import PrimaryButton from "@/Components/PrimaryButton";
+import {useModalStore} from "@/Stores/modalStore";
+import {useApiStore} from "@/Stores/apiStore";
+import AddBugModal from "@/Components/Bugs/AddBugModal";
 
-const modal = ref(null);
+const modalStore = useModalStore();
+
+const apiStore = useApiStore();
 
 function destroy(id) {
     Inertia.delete(`/boards/${id}`);
 }
 
-function openModal() {
-    document.getElementById('column-modal').dispatchEvent(new Event('open-modal'));
+function openBugModal() {
+    modalStore.showAddBugToColumn = !modalStore.showAddBugToColumn;
+}
+
+function openColumnModal() {
+    modalStore.showNewColumnModalBoardsOne = !modalStore.showNewColumnModalBoardsOne;
 }
 
 const log = computed(() => console);
+
+
 </script>
 
 <style scoped>

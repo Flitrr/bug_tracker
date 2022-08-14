@@ -28,6 +28,12 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/user', function() {
+    $user_id = \Illuminate\Support\Facades\Auth::user()->id;
+    $user = \App\Models\User::with(['boards.columns.bugs.comments', 'bugs.comments', 'comments'])->find($user_id);
+    return json_encode($user);
+})->middleware(['auth', 'verified']);
+
 Route::get('/boards', [\App\Http\Controllers\BoardsController::class, 'index'])->middleware(['auth', 'verified'])->name('boards.index');
 Route::post('/boards', [\App\Http\Controllers\BoardsController::class, 'store'])->middleware(['auth', 'verified'])->name('boards.store');
 Route::get('/boards/new', [\App\Http\Controllers\BoardsController::class, 'create'])->middleware(['auth', 'verified'])->name('boards.create');
@@ -51,8 +57,11 @@ Route::get('/columns/{column}/bugs/create', [\App\Http\Controllers\BugColumnsCon
 Route::get('/bugs', [\App\Http\Controllers\BugsController::class, 'index'])->middleware(['auth', 'verified'])->name('bugs.index');
 Route::post('/bugs', [\App\Http\Controllers\BugsController::class, 'store'])->middleware(['auth', 'verified'])->name('bugs.store');
 Route::get('/bugs/create', [\App\Http\Controllers\BugsController::class, 'create'])->middleware(['auth', 'verified'])->name('bugs.create');
-Route::get('/bugs/{bug}', [\App\Http\Controllers\BugsController::class, 'show'])->middleware(['auth', 'verified'])->name('bugs.update');
+Route::get('/bugs/{bug}', [\App\Http\Controllers\BugsController::class, 'show'])->middleware(['auth', 'verified'])->name('bugs.show');
 Route::put('/bugs/{bug}', [\App\Http\Controllers\BugsController::class, 'update'])->middleware(['auth', 'verified'])->name('bugs.update');
 Route::delete('/bugs/{bug}', [\App\Http\Controllers\BugsController::class, 'destroy'])->middleware(['auth', 'verified'])->name('bugs.destroy');
 Route::get('/bugs/{bug}/edit', [\App\Http\Controllers\BugsController::class, 'edit'])->middleware(['auth', 'verified'])->name('bugs.edit');
+
+Route::get('/bugs/{bug}/comments/create', [\App\Http\Controllers\CommentsController::class, 'create'])->middleware(['auth', 'verified'])->name('bugs.comments.create');
+Route::post('/bugs/{bug}/comments', [\App\Http\Controllers\CommentsController::class, 'store'])->middleware(['auth', 'verified'])->name('bugs.comments.store');
 require __DIR__ . '/auth.php';

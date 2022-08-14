@@ -7,7 +7,7 @@
             </h2>
         </template>
         <div class="h-96 flex items-stretch justify-center">
-            <form class="w-6/12" @submit.prevent="form.put(`/bugs/${bug.id}`)">
+            <form class="w-6/12" @submit.prevent="() => form.put(`/bugs/${bug.id}`)">
                 <div>
                     <Label for="user">Name:</Label>
                     <Input id="user" name="user" v-model="form.user"/>

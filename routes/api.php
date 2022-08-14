@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::get('/user', function (Request $request) {
+//    $user = \Illuminate\Support\Facades\Auth::user();
+//    $boards = $user->boards;
+//    $bugs = $user->bugs;
+//    $comments = $user->comments;
+//    $columns = $boards->columns;
+//    $column_bugs = $columns->bugs;
+//    $column_bugs->comments;
+//    $bugs->comments;
+//    return json_encode($user);
+//})->middleware(['auth:sanctum']);

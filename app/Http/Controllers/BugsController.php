@@ -32,6 +32,7 @@ class BugsController extends Controller
 
     public function show(Bug $bug)
     {
+        $bug->comments;
         return Inertia::render('Bugs/View', ['bug' => $bug, 'canGoBack' => true]);
     }
 
@@ -46,6 +47,8 @@ class BugsController extends Controller
         $bug->name = $request->user;
         $bug->description = $request->description;
         $bug->save();
+        $comments = $bug->comments;
+        $comments->commentable;
         return Inertia::render('Bugs/View', ['bug' => $bug]);
     }
 

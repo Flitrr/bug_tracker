@@ -6,7 +6,7 @@
                 Edit Board
             </h2>
         </template>
-        <form action="#" method="post" @submit.prevent="form.put(`/boards/${board.id}`)" class="mx-auto w-96">
+        <form action="#" method="post" @submit.prevent="() => form.put(`/boards/${board.id}`)" class="mx-auto w-96">
             <div>
                 <Label for="name">Name</Label>
                 <Input id="name" class="w-full" name="name" v-model="form.name" />
