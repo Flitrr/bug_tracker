@@ -1,7 +1,7 @@
 <template>
-    <div class='outter-div flex items-center'>
-        <ul class="w-full">
-            <li v-for="(board, index) in boards" :key="index" class="flex justify-around ">
+    <div >
+        <ul class="px-12 mt-12">
+            <li v-for="(board, index) in boards" :key="index" class="flex mt-8 justify-between items-baseline pb-8 border-b">
                 <Link :href="`/boards/${board.id}`">{{board.name}}</Link>
                 <div class="flex justify-around items-center w-6/12">
                     <EditButton :href="`/boards/${board.id}/edit`">Edit</EditButton>
@@ -24,7 +24,5 @@ function destroy(id) {
 </script>
 
 <style scoped>
-.outter-div {
-    min-height: 75vh;
-}
+
 </style>

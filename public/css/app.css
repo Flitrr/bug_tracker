@@ -795,6 +795,9 @@ select {
 .mb-2 {
   margin-bottom: 0.5rem;
 }
+.mt-12 {
+  margin-top: 3rem;
+}
 .block {
   display: block;
 }
@@ -951,6 +954,9 @@ select {
 }
 .items-center {
   align-items: center;
+}
+.items-baseline {
+  align-items: baseline;
 }
 .items-stretch {
   align-items: stretch;
@@ -1169,6 +1175,10 @@ select {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
 .pt-8 {
   padding-top: 2rem;
 }
@@ -1195,6 +1205,9 @@ select {
 }
 .pt-6 {
   padding-top: 1.5rem;
+}
+.pb-8 {
+  padding-bottom: 2rem;
 }
 .text-left {
   text-align: left;

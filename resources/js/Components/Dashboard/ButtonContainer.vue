@@ -9,11 +9,11 @@
 
 <script setup>
 import PrimaryButton from "@/Components/PrimaryButton";
+import {useModalStore} from "@/Stores/modalStore";
 const props = defineProps(['boards']);
+const modalStore = useModalStore();
 function openNewBoardModal() {
-    const modal = document.getElementById('create-board');
-    const event = new Event('open-modal');
-    modal.dispatchEvent(event);
+    modalStore.createBoardModal = !modalStore.createBoardModal;
 }
 </script>
 

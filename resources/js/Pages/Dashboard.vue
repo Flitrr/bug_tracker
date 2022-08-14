@@ -2,6 +2,7 @@
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import ButtonContainer from "@/Components/Dashboard/ButtonContainer";
+import CreateBoardModal from "@/Components/Boards/CreateBoardModal";
 
 </script>
 
@@ -14,6 +15,7 @@ import ButtonContainer from "@/Components/Dashboard/ButtonContainer";
                 Dashboard
             </h2>
         </template>
+        <CreateBoardModal />
 
         <ButtonContainer />
     </BreezeAuthenticatedLayout>
