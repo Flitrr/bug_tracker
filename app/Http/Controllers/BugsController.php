@@ -48,7 +48,9 @@ class BugsController extends Controller
         $bug->description = $request->description;
         $bug->save();
         $comments = $bug->comments;
-        $comments->commentable;
+        foreach ($comments as $comment) {
+            $comment->commentable;
+        }
         return Inertia::render('Bugs/View', ['bug' => $bug]);
     }
 

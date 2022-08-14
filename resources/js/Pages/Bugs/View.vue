@@ -23,7 +23,7 @@
                 <li class="list-none mt-4 text-lg" v-for="comment in $page.props.bug.comments">
                     <p>{{comment.body}}</p>
                 </li>
-                <form @submit.prevent="() => form.post(`/bugs/${$page.props.bug.id}/comments`)" class="flex">
+                <form @submit.prevent="() => form.post(`/bugs/${$page.props.bug.id}/comments`, {preserveState: false})" class="flex">
                 <PrimaryButton >Add Comment</PrimaryButton>
                     <Input class="w-full inline-block" v-model.lazy.trim="form.body" />
                 </form>

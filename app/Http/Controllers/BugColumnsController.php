@@ -32,7 +32,7 @@ class BugColumnsController extends Controller
         $bug->name = $request->user;
         $bug->description = $request->description;
         $bug->save();
-        $bug->users()->attach($request->user_id);
+        $bug->users()->attach(Auth::user()->id);
         $bug->columns()->attach($column->id);
         return Redirect::route('boards.show', ['board' => $column->board->id]);
     }

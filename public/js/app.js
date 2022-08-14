@@ -24222,7 +24222,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* UNKEYED_FRAGMENT */
       )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
         onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-          return $setup.form.post("/bugs/".concat(_ctx.$page.props.bug.id, "/comments"));
+          return $setup.form.post("/bugs/".concat(_ctx.$page.props.bug.id, "/comments"), {
+            preserveState: false
+          });
         }, ["prevent"])),
         "class": "flex"
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["PrimaryButton"], null, {
