@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Board;
 use App\Models\Bug;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,10 +31,12 @@ class BugsController extends Controller
         return Redirect::route('bugs.index');
     }
 
-    public function show(Bug $bug)
+    public function show($bug)
     {
-        $bug->comments;
-        return Inertia::render('Bugs/View', ['bug' => $bug, 'canGoBack' => true]);
+
+        $betterBug = Bug::with(['columns.board', 'comments.commentable'])->where('id', '=', $bug)->get()->first();
+        $boards = Board::with(['columns.bugs.comments'])->whereIn('id', Auth::user()->boards->pluck('id'))->get();
+        return Inertia::render('Bugs/View', ['bug' => $betterBug, 'canGoBack' => true, 'boards' => $boards]);
     }
 
     public function edit(Bug $bug)
@@ -51,7 +54,8 @@ class BugsController extends Controller
         foreach ($comments as $comment) {
             $comment->commentable;
         }
-        return Inertia::render('Bugs/View', ['bug' => $bug]);
+        $boards = Board::with(['columns.bugs.comments'])->whereIn('id', Auth::user()->boards->pluck('id'))->get();
+        return Inertia::render('Bugs/View', ['bug' => $bug, 'boards' => $boards]);
     }
 
     public function destroy(Bug $bug)

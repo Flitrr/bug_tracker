@@ -6,10 +6,10 @@
                 Edit Board
             </h2>
         </template>
-        <form action="#" method="post" @submit.prevent="() => form.put(`/boards/${board.id}`)" class="mx-auto w-96">
+        <form @submit.prevent="() => form.put(`/boards/${board.id}`, {method: 'put', preserveScroll: false, preserveState: false})" class="mx-auto w-96">
             <div>
-                <Label for="name">Name</Label>
-                <Input id="name" class="w-full" name="name" v-model="form.name" />
+                <Label for="user">Name</Label>
+                <Input id="user" class="w-full" name="user" v-model="form.user" />
             </div>
             <div>
                 <PrimaryButton type="submit" class="mx-auto mt-4 block">Submit</PrimaryButton>
@@ -27,7 +27,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 
 const props = defineProps(['board']);
 
-const form = useForm({name: props.board.name});
+const form = useForm({user: props.board.name});
 </script>
 
 <style scoped>

@@ -22,12 +22,19 @@ import {Inertia} from "@inertiajs/inertia";
 import {useModalStore} from "@/Stores/modalStore";
 const modalStore = useModalStore();
 const props = defineProps(['board']);
+const emit = defineEmits(['refreshed'])
 const form = useForm({
     name: null,
     board_id: props.board
 })
-function submit() {
-    form.post(window.location.href + '/columns', {preserveState: false});
+async function submit() {
+    closeModal();
+    try {
+        const response = await window.axios.post(window.location.href + '/columns', {name: form.name, board_id: props.board});
+        emit('refreshed');
+    } catch (e) {
+        console.error(e);
+    }
 }
 function closeModal() {
     modalStore.showNewColumnModalBoardsOne = ! modalStore.showNewColumnModalBoardsOne;

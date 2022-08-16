@@ -6,13 +6,13 @@
                 New Board
             </h2>
         </template>
-        <form action="#" method="post" @submit.prevent="() => form.post('/boards')" class="mx-auto w-96">
+        <form @submit.prevent="() => form.post(route('boards.store'))" class="mx-auto w-96">
             <div>
-                <Label for="name">Name</Label>
-                <Input id="name" class="w-full" name="name" v-model="form.name" />
+                <Label for="user">Name</Label>
+                <Input id="user" class="w-full" name="title" v-model="form.user" />
             </div>
             <div>
-                <PrimaryButton type="submit" class="mx-auto mt-4 block">Submit</PrimaryButton>
+                <PrimaryButton class="mx-auto mt-4 block">Submit</PrimaryButton>
             </div>
         </form>
     </Authenticated>
@@ -25,7 +25,7 @@ import Label from '@/Components/Label';
 import Input from "@/Components/Input";
 import PrimaryButton from "@/Components/PrimaryButton";
 
-const form = useForm({name: null})
+const form = useForm({user: null})
 </script>
 
 <style scoped>

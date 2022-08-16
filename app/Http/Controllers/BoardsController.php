@@ -28,9 +28,9 @@ class BoardsController extends Controller
 
     public function show(Board $board)
     {
-        $fullBoard = Board::with('columns.bugs')->find($board->id);
+        $fullBoard = Board::with('columns.bugs.columns')->where('id', '=', $board->id)->get();
         return Inertia::render('Boards/One', [
-            'board' => $fullBoard,
+            'board' => $fullBoard->first(),
         ]);
     }
 
@@ -55,10 +55,21 @@ class BoardsController extends Controller
     public function update(Request $request, Board $board)
     {
         $this->authorize('update', $board);
-        $board->name = $request->name;
+        $board->name = $request->user;
         $board->save();
         return Redirect::route('boards.show', [
-            'board' => $board,
+            'board' => $board->id,
         ]);
+    }
+    public function fetch(Board $board)
+    {
+        $columns = $board->columns;
+        foreach ($columns as $column) {
+            $bugs = $column->bugs;
+            foreach ($bugs as $bug) {
+                $bug->comments;
+            }
+        }
+        return json_encode($board);
     }
 }

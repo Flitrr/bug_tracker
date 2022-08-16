@@ -2,7 +2,7 @@
     <div >
         <ul class="px-12 mt-12">
             <li v-for="(board, index) in boards" :key="index" class="flex mt-8 justify-between items-baseline pb-8 border-b">
-                <Link :href="`/boards/${board.id}`">{{board.name}}</Link>
+                <Link :href="`/boards/${board.id}`" method="get" >{{board.name}}</Link>
                 <div class="flex justify-around items-center w-6/12">
                     <EditButton :href="`/boards/${board.id}/edit`">Edit</EditButton>
                     <DeleteButton @click="() => destroy(board.id)">Delete</DeleteButton>

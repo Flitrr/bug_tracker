@@ -25,3 +25,5 @@ use Illuminate\Support\Facades\Route;
 //    $bugs->comments;
 //    return json_encode($user);
 //})->middleware(['auth:sanctum']);
+
+Route::get('/boards/{board}', [\App\Http\Controllers\BoardsController::class, 'fetch'])->middleware(['auth:sanctum'])->name('boards.fetch');

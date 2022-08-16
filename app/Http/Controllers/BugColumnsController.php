@@ -7,6 +7,7 @@ use App\Models\Column;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
 
 class BugColumnsController extends Controller
@@ -40,12 +41,12 @@ class BugColumnsController extends Controller
     public function select(Column $column, Bug $bug)
     {
         $bug->columns()->attach($column->id);
-        return Redirect::route('boards.show', ['board' => $column->board->id]);
+        return Response::noContent();
     }
 
     public function remove(Column $column, Bug $bug)
     {
         $bug->columns()->detach([$column->id]);
-        return Redirect::route('boards.show', ['board' => $column->board->id]);
+        return Response::noContent();
     }
 }
